@@ -1,13 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { Provider } from 'react-redux';
+
 import App from './App';
+import './index.css';
 import * as serviceWorker from './serviceWorker';
+import store from './state/store'
+
+
+/* 
+  1. Зарядка
+  2. 7:00 - 18:30 (9:00)
+    Работа минимум
+    Учеба JS || Учеба ПО вечер
+  3. 20:00 Тренировка
+*/
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
