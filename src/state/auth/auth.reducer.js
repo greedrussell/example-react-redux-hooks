@@ -1,9 +1,12 @@
 import actionTypes from './actionTypes'
-import { reducerGetAuthData } from './reducer/get-auth-data.reducer'
+import { reducerGetAuthData } from './reducer/auth-data.reducer'
 
 const initialState = {
   accessKey: '',
-  secretKey: ''
+  secretKey: '',
+  userName: '',
+  isAuth: false,
+  error: ''
 }
 
 const authReducer = (
@@ -11,7 +14,13 @@ const authReducer = (
   { type, data }
 ) => {
   switch (type) {
-    case actionTypes.GET_AUTH_DATA:
+    case actionTypes.AUTH_REQUEST:
+      return reducerGetAuthData(state, data)
+
+    case actionTypes.AUTH_SUCCESS:
+      return reducerGetAuthData(state, data)
+
+    case actionTypes.AUTH_FAILED:
       return reducerGetAuthData(state, data)
 
     default:
