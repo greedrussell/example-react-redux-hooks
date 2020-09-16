@@ -1,0 +1,81 @@
+.Nav {
+  background-color: #fff;
+  box-shadow: 0 4px 8px 4px rgba(0,0,0,0.35);
+  border-bottom: 1px solid #fefefe;
+  z-index: 1;
+}
+
+.Nav__wrapper {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Logo {
+  flex: 1 0 25%;
+  min-width: 0;
+}
+
+.Logo__link {
+  width: 56px;
+  height: 40px;
+  display: block;
+}
+
+.Menu__list {
+  display: flex;
+  flex: 1 0 50%;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+  list-style-type: none;
+}
+
+.Menu__item {
+  font-family: sans-serif;
+  font-size: 14px;
+  color: #333;
+  padding: 0 16px;
+  cursor: pointer;
+}
+
+.Menu__item:first-child {
+  padding-left: 0;
+}
+
+.Menu__item:last-child {
+  padding-right: 0;
+}
+
+.Nav__wrapper__btn-block {
+  display: flex;
+  flex: 1 0 25%;
+  min-width: 0;
+  justify-content: flex-end;
+}
+
+.Nav__wrapper__btn-block button:first-child {
+  margin-right: 24px;
+}
+
+.Nav__profile {
+  display: flex;
+  align-items: center;
+  flex: 1 0 25%;
+  min-width: 0;
+  justify-content: flex-end;
+}
+
+.Nav__user-name {
+  margin-right: 16px;
+}
+
+.Nav__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin-right: 16px;
+}

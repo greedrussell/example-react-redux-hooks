@@ -1,38 +1,86 @@
-import React from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { actionAuth } from '../../state/auth/action/auth-data.action'
+import React, { useCallback } from 'react'
+import { useSelector, useDispatch, useStore } from 'react-redux'
+import { actionLogIn } from '../../state/auth/action/log-in.action'
+import { actionLogOut } from '../../state/auth/action/log-out.action'
 
+import LogoSVG from '../../logo.svg'
 import './nav.css'
 
-const Nav = ({ isAuth, userName, actionAuth }) => <nav className='Nav'>
-  <div className='container'>
-    <div className='Nav__wrapper'>
-      {
-        !isAuth ? (
-          <>
-            <button className='btn btn--blue' onClick={
-              () => actionAuth()
-            }>Log in</button>
-            <button className='btn'>Log out</button>
-          </>
-        ) : (
-            <p className='Nav__user-name'>{userName}</p>
-          )
-      }
-    </div>
-  </div>
-</nav>
-
-const mapStateToProps = state => ({
-  isAuth: state.auth.isAuth
-})
-
-const mapDispatchToProps = dispatch => bindActionCreators(
+const MENU_LIST = [
   {
-    actionAuth
+    id: 1,
+    text: 'Home',
   },
-  dispatch
-)
+  {
+    id: 2,
+    text: 'About',
+  },
+  {
+    id: 3,
+    text: 'Contact',
+  },
+  {
+    id: 4,
+    text: 'Catalog',
+  },
+]
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nav)
+const LogoComponent = ({ alt }) => {
+  console.log('render LogoComponent')
+  return (
+    <div className='Logo'>
+      <a href='/#' className='Logo__link'>
+        <img src={LogoSVG} alt={alt} />
+      </a>
+      <div>{alt}</div>
+    </div>
+  )
+}
+// проверить мемоизацию так как список меню итемов это массив
+const MenuComponent = ({ menu }) => {
+  console.log('render MenuComponent')
+  return (
+    <ul className='Menu__list'>
+      {
+        menu.map(item => (
+          <li className='Menu__item' key={item.id}>
+            {item.text}
+          </li>))
+      }
+    </ul>
+  )
+}
+
+const Nav = () => {
+  const dispatch = useDispatch()
+  const { isAuth, userName } = useSelector(state => ({
+    isAuth: state.auth.isAuth,
+    userName: state.auth.userName
+  }))
+
+  return (
+    <nav className='Nav'>
+      <div className='container'>
+        <div className='Nav__wrapper'>
+          <LogoComponent alt='React App' />
+          <MenuComponent menu={MENU_LIST} />
+          {
+            !isAuth ? (
+              <div className='Nav__wrapper__btn-block'>
+                <button className='btn btn--blue' onClick={() => dispatch(actionLogIn())}>Log In</button>
+              </div>
+            ) : (
+                <div className='Nav__profile'>
+                  <div className='Nav__icon'></div>
+                  <p className='Nav__user-name'>{userName}</p>
+                  <button className='btn' onClick={() => dispatch(actionLogOut())}>Log out</button>
+                </div>
+              )
+          }
+        </div>
+      </div>
+    </nav>
+  )
+}
+
+export default Nav

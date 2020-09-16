@@ -14,13 +14,16 @@ const authReducer = (
   { type, data }
 ) => {
   switch (type) {
-    case actionTypes.AUTH_REQUEST:
+    case actionTypes.LOG_IN_REQUEST:
       return reducerGetAuthData(state, data)
 
-    case actionTypes.AUTH_SUCCESS:
+    case actionTypes.LOG_IN_SUCCESS:
       return reducerGetAuthData(state, data)
 
-    case actionTypes.AUTH_FAILED:
+    case actionTypes.LOG_OUT_REQUEST:
+      return reducerGetAuthData(state, data)
+
+    case actionTypes.LOG_OUT_SUCCESS:
       return reducerGetAuthData(state, data)
 
     default:
