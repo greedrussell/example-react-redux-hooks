@@ -3,4 +3,6 @@
   width: 50%;
   height: 500px;
   float: left;
+  padding: 20px;
+  box-sizing: border-box;
 }

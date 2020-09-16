@@ -1,32 +1,17 @@
 import React, { useCallback } from 'react'
-import { useSelector, useDispatch, useStore } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { actionLogIn } from '../../state/auth/action/log-in.action'
 import { actionLogOut } from '../../state/auth/action/log-out.action'
 
 import LogoSVG from '../../logo.svg'
 import './nav.css'
 
-const MENU_LIST = [
-  {
-    id: 1,
-    text: 'Home',
-  },
-  {
-    id: 2,
-    text: 'About',
-  },
-  {
-    id: 3,
-    text: 'Contact',
-  },
-  {
-    id: 4,
-    text: 'Catalog',
-  },
-]
 
-const LogoComponent = ({ alt }) => {
-  console.log('render LogoComponent')
+
+const LogoComponent = () => {
+  const alt = useSelector(state => state.gallery.alt)
+  console.log('render LogoComponent', alt)
+
   return (
     <div className='Logo'>
       <a href='/#' className='Logo__link'>
@@ -37,8 +22,10 @@ const LogoComponent = ({ alt }) => {
   )
 }
 // проверить мемоизацию так как список меню итемов это массив
-const MenuComponent = ({ menu }) => {
+const MenuComponent = () => {
+  const menu = useSelector(state => state.gallery.menu)
   console.log('render MenuComponent')
+
   return (
     <ul className='Menu__list'>
       {
@@ -62,8 +49,8 @@ const Nav = () => {
     <nav className='Nav'>
       <div className='container'>
         <div className='Nav__wrapper'>
-          <LogoComponent alt='React App' />
-          <MenuComponent menu={MENU_LIST} />
+          <LogoComponent />
+          <MenuComponent />
           {
             !isAuth ? (
               <div className='Nav__wrapper__btn-block'>
