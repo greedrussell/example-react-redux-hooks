@@ -12,7 +12,7 @@ export const ping = store => next => action => {
 
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(
-    ping,
+    // ping,
     thunk
   )
 ))
